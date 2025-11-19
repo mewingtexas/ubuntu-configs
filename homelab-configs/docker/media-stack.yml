@@ -1,0 +1,27 @@
+
+version: "3.9"
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    ports:
+      - "8096:8096" ### Jellyfin web UI
+    volumes:
+      - ./configs/jellyfin:/config
+      - ./media:/media
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    ports:
+      - "8080:8080" ### qBittorrent web UI
+    volumes:
+      - ./configs/qbittorrent:/config
+      - ./media:/downloads
+    environment:
+      - PUID=1000 ### user ID
+      - PGID=1000 ### group ID
+      - TZ=America/New_York
+    restart: unless-stopped
