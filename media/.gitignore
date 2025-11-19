@@ -1,0 +1,5 @@
+# Ignore media files
+media/*
+
+# Ignore qBittorrent runtime configs
+configs/qbittorrent/qBittorrent/*
